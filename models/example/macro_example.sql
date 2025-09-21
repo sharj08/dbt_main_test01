@@ -5,7 +5,7 @@ SELECT
     p.Product_ID,
     p.Product_Name,
     o.Quantity,
-    {{ get_date_parts_flat('Order_Date') }} -- No "as date_extract"
+    {{ get_date_parts('o.Order_Date') }} as date_extract
 FROM
     orders o
 JOIN
