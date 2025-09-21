@@ -1,16 +1,10 @@
-{% macro get_date_parts(date_column) %}
-
-   STRUCT(
-        {{ date_column }} AS original_date,
-        YEAR({{ date_column }}) AS year,
-        MONTH({{ date_column }}) AS month,
-        DAY({{ date_column }}) AS day,
-        DAYOFWEEK({{ date_column }}) AS day_of_week,
-        DAYOFYEAR({{ date_column }}) AS day_of_year,
-        WEEKOFYEAR({{ date_column }}) AS week,
-        QUARTER({{ date_column }}) AS quarter
-    )
+{% macro get_date_parts_flat(date_column) %}
+    TO_DATE({{ date_column }}, 'MM/dd/yyyy') AS original_date,
+    YEAR(TO_DATE({{ date_column }}, 'MM/dd/yyyy')) AS year,
+    MONTH(TO_DATE({{ date_column }}, 'MM/dd/yyyy')) AS month,
+    DAY(TO_DATE({{ date_column }}, 'MM/dd/yyyy')) AS day,
+    DAYOFWEEK(TO_DATE({{ date_column }}, 'MM/dd/yyyy')) AS day_of_week,
+    DAYOFYEAR(TO_DATE({{ date_column }}, 'MM/dd/yyyy')) AS day_of_year,
+    WEEKOFYEAR(TO_DATE({{ date_column }}, 'MM/dd/yyyy')) AS week,
+    QUARTER(TO_DATE({{ date_column }}, 'MM/dd/yyyy')) AS quarter
 {% endmacro %}
-
-
-
